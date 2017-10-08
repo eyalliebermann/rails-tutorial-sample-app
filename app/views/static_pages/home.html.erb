@@ -1,5 +1,7 @@
+<% provide(:title, "Home") %>
+
 <head>
-  <title>Home | RoR Tutorial Sample App</title>
+  <title><%= yield (:title) %> | RoR Tutorial Sample App</title>
 </head>
 <body>
 <h1>Static home page</h1>
