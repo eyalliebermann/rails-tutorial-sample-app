@@ -68,7 +68,7 @@ class UserTest < ActiveSupport::TestCase
   test "email is save as lowercase" do
     @user.email.upcase!
     @user.save
-    assert_equal @user.email.downcase, @user.email, "email is ecpecterd to be lowercase only after being saved"
+    assert_equal @user.email.downcase, @user.reload.email, "email is ecpecterd to be lowercase only after being saved"
   end
   test "verify tests are independent" do
     assert @user.valid?
