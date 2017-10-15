@@ -78,4 +78,4 @@ bower.json
 
 #avoid .DS_STORE and the schena.rb since it can be created using migrate
 .DS_Store
-db/schema.rbgit git g
+db/schema.rb
