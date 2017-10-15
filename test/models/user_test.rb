@@ -65,6 +65,11 @@ class UserTest < ActiveSupport::TestCase
     assert_not dup.valid?
   end
 
+  test "email is save as lowercase" do
+    @user.email.upcase!
+    @user.save
+    assert_equal @user.email.downcase, @user.email, "email is ecpecterd to be lowercase only after being saved"
+  end
   test "verify tests are independent" do
     assert @user.valid?
   end
