@@ -57,6 +57,14 @@ class UserTest < ActiveSupport::TestCase
     @user.save
     assert_not duplicant.valid?
   end
+
+  test "duplicate email should be rejected regardless of case" do
+    dup = @user.dup
+    dup.email.upcase!
+    @user.save
+    assert_not dup.valid?
+  end
+
   test "verify tests are independent" do
     assert @user.valid?
   end
