@@ -52,6 +52,11 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  test "duplicate email should be rejected" do
+    duplicant = User.new(name:"something", email:@user.email)
+    @user.save
+    assert_not duplicant.valid?
+  end
   test "verify tests are independent" do
     assert @user.valid?
   end
