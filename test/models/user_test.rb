@@ -70,6 +70,17 @@ class UserTest < ActiveSupport::TestCase
     @user.save
     assert_equal @user.email.downcase, @user.reload.email, "email is ecpecterd to be lowercase only after being saved"
   end
+
+  test "password should be present (nonblank)" do
+    @user.password = @user.password_confirmation = " " * 6
+    assert_not @user.valid?
+  end
+
+  test "password should have a minimum length" do
+    @user.password = @user.password_confirmation = "a" * 5
+    assert_not @user.valid?
+  end
+
   test "verify tests are independent" do
     assert @user.valid?
   end
