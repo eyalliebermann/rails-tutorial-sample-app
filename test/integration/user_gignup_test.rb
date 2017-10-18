@@ -17,6 +17,8 @@ class UserGignupTest < ActionDispatch::IntegrationTest
     assert_difference 'User.count',1 do
       post users_path, params: {user:{name:'eyal', email:'valid@example.com', password:'foobar', password:'foobar'}}
     end
+    follow_redirect!
+    assert_template 'users/show'
   end
 
 
