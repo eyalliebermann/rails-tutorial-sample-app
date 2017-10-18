@@ -12,6 +12,13 @@ class UserGignupTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test 'user creation results in data change' do
+    get signup_path
+    assert_difference 'User.count',1 do
+      post users_path, params: {user:{name:'eyal', email:'valid@example.com', password:'foobar', password:'foobar'}}
+    end
+  end
+
 
   test 'show at least six errors on maximally erornous user' do
     get signup_path
