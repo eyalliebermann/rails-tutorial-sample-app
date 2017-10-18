@@ -7,7 +7,18 @@ class UserGignupTest < ActionDispatch::IntegrationTest
   test 'do not create user when errornous' do
     get signup_path
     assert_no_difference 'User.count' do
-    post users_path, params: {user: {name:'', email:'e@invalid_domain', password:'foo', password_confirmation:'bar'}}
-      end
+      post users_path, params: {user: {name:'', email:'e@invalid_domain', password:'foo', password_confirmation:'bar'}}
+    end
+  end
+
+
+  test 'show at least six errors on maximally erornous user' do
+    get signup_path
+    post users_path, params: {user: {name:'', email:'', password:'', password_confirmation:''}}
+    assert_select "#error_explanation ul li"  do | element|
+      puts
+      # debug reason for failure # element.children.each {|msg| puts msg}
+      assert_equal  6, element.children.count
+    end
   end
 end
