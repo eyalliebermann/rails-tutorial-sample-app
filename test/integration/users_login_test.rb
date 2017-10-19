@@ -6,9 +6,14 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   # end
 
   test 'wrong password flash displayed once and disappear' do
+    get login_path
+    assert_template 'sessions/new'
     post login_path, params: {session: {email:'e@ee.com', password:'qqqqqqq'}}
-    assert_select('.alert-danger')
+    assert_template 'sessions/new'
+    assert_not flash.empty? #assert_select('.alert-danger')
     get root_path
-    assert_select '.alert-danger', 0
+    assert flash.empty? #assert_select '.alert-danger', 0
   end
+
+
 end
