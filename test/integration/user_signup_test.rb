@@ -15,7 +15,7 @@ class UserGignupTest < ActionDispatch::IntegrationTest
   test 'user creation results in data change' do
     get signup_path
     assert_difference 'User.count',1 do
-      post users_path, params: {user:{name:'eyal', email:'valid@example.com', password:'foobar', password:'foobar'}}
+      post users_path, params: {user:{name:'eyal', email:'valid@example.com', password:'foobar', password_confirmation:'foobar'}}
     end
     follow_redirect!
     assert_template 'users/show'
