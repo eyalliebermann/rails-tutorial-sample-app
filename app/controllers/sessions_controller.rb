@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       flash[:success] = "Hey #{user.name}.  You're logged in"
       render 'new'
     else
-      flash[:danger] = 'Oops. wrong email or password.'
+      flash.now[:danger] = 'Oops. wrong email or password.'
       render 'new'
     end
   end
