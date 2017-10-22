@@ -7,7 +7,8 @@ class SessionsController < ApplicationController
     user= User.find_by(email: email)
     if user && user.authenticate(params[:session][:password])
       flash[:success] = "Hey #{user.name}.  You're logged in"
-      render 'new'
+      login user
+      redirect_to user
     else
       flash.now[:danger] = 'Oops. wrong email or password.'
       render 'new'
@@ -15,5 +16,6 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    @current_user = nil
   end
 end
