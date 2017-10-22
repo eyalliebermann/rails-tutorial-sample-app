@@ -15,6 +15,10 @@ class SessionsController < ApplicationController
     end
   end
 
+  def logout
+    destroy
+  end
+
   def destroy
     @current_user = nil
   end
