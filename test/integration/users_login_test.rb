@@ -56,7 +56,10 @@ in shown when no session exists' do
     assert_select 'a[href=?]', logout_path, count: 0
 
     post login_path, params: {session: {email: @user.email, password: 'password'}}
+    assert is_logged_in?
+
     assert_redirected_to @user
+    follow_redirect!
     get root_path
     assert_select 'a[href=?]', login_path, count: 0
     assert_select 'a[href=?]', logout_path, count: 1
